@@ -27,6 +27,8 @@ var Haml;
             value = JSON.parse("[" + attribs[key] +"]")[0];
             if (value === true) {
               value = key;
+            } else if (typeof value === 'string' && /\{\{-?(.*)\}\}/.test(value)) {
+              value = (value+"").replace(/\"/g, "\\\"");
             } else if (typeof value === 'string' && embedder.test(value)) {
               value = '" +\n' + parse_interpol(html_escape(value)) + ' +\n"';
             } else {
@@ -424,7 +426,7 @@ var Haml;
         return parse_interpol('\n<script type="text/javascript">\n' +
           '//<![CDATA[\n' +
           this.contents.join("\n") +
-          "\n//]]>\n</script>\n");
+          "\n//]"+"]>\n</scr"+"ipt>\n");
       }
     },
 
