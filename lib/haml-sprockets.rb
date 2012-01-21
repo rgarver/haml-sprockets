@@ -12,9 +12,7 @@ module Haml
       def prepare
       end
       def evaluate(scope,locals,&block)
-        haml_code = data.dup
-        haml_code = haml_code.gsub(/\\/,"\\\\").gsub(/\'/,"\\\\'").gsub(/\n/,"\\n")
-        "Haml('#{haml_code}', {escapeHtmlByDefault:true})"
+        "Haml(#{data.inspect}, {escapeHtmlByDefault:true})"
       end
     end
   end
